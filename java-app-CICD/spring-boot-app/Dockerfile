@@ -3,7 +3,7 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 
 # Simply the artifact path
-ARG artifact=target/spring-boot-web.jar
+ARG artifact=java-app-CICD/spring-boot-app/target/spring-boot-web.jar
 
 WORKDIR /opt/app
 
