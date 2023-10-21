@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "spring-boot-app-chart.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "spring-boot-app-chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "spring-boot-app-chart.name" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: CONFIG_FILE
+              value: /config/application.properties
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+            - name: secret-volume
+              mountPath: /secrets
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "spring-boot-app-chart.fullname" . }}-config
+        - name: secret-volume
+          secret:
+            secretName: {{ include "spring-boot-app-chart.fullname" . }}-secret

@@ -1,0 +1,63 @@
+#Author: Jorge Ceballos
+#Description: Sonarqube v 10.2.1 installation in cqservers groups
+---
+- name: Install SonarQube
+  hosts: cqservers
+  become: yes
+
+  vars_files:
+    - secrets.yml
+
+  tasks:
+ 
+    - name: Upgrade packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+      changed_when: false
+      
+    - name: Install necessary packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - openjdk-17-jdk
+        - unzip
+
+    - name: Download SonarQube
+      get_url:
+        url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.2.1.78527.zip
+        dest: /tmp/sonarqube.zip
+
+    - name: Unzip SonarQube
+      unarchive:
+        src: /tmp/sonarqube.zip
+        dest: /opt
+        remote_src: yes
+      notify:
+        - Start SonarQube
+
+    - name: Create a systemd service for SonarQube
+      template:
+        src: sonarqube.service.j2
+        dest: /etc/systemd/system/sonarqube.service
+      notify:
+        - Start SonarQube
+
+    - name: Start SonarQube
+      systemd:
+        name: sonarqube
+        enabled: yes
+        state: started
+
+        
+  handlers:
+    - name: Start SonarQube
+      systemd:
+        name: sonarqube
+        enabled: yes
+        state: started
+
+    ```sh
+    terraform destroy
+    ```

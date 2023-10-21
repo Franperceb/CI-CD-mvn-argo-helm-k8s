@@ -1,0 +1,9 @@
+Log Analysis Report: (2023-10-21 14:08:09). Instances (Started) correctly
+Pod: dev-spring-boot-app-chart-794479cdd5-nv7vl, Container: spring-boot-app-chart
+Pod: prod-spring-boot-app-chart-79c59c87b5-6kwlx, Container: spring-boot-app-chart
+Pod: spring-boot-app-57b9b7b56-mqlkx, Container: spring-boot-app
+Pod: spring-boot-app-57b9b7b56-w258t, Container: spring-boot-app
+Pod: spring-boot-app-chart-7dbb96b45c-rxgvd, Container: spring-boot-app-chart
+Pod: spring-boot-app-dev-spring-boot-app-chart-8649786ccf-hvjlj, Container: spring-boot-app-chart
+Pod: spring-boot-app-release-spring-boot-app-chart-5bdddbb8f9-7cmmt, Container: spring-boot-app-chart
+Pod: spring-boot-app-spring-boot-app-chart-bb8675999-n88tv, Container: spring-boot-app-chart

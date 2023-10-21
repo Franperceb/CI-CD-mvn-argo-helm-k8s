@@ -1,0 +1,11 @@
+# Default values for spring-boot-app-chart.
+
+# values.yaml
+replicaCount: 1
+image:
+  repository: franperceb/java-app-cicd
+  tag: latest
+service:
+  type: NodePort
+  port: 80
+  targetPort: 8080
